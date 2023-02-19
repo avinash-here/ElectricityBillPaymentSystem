@@ -10,3 +10,7 @@ Query OK, 0 rows affected (0.02 sec)
 mysql> insert into admin values ('admin', 'Avinash', 'admin');
 Query OK, 1 row affected (0.01 sec)
 
+mysql> create table consumers (consumerId int PRIMARY KEY auto_increment, firstName varchar(16) not null, lastName 
+varchar(16), username varchar(20) not null unique, password varchar(20) not null, status varchar(8) default 'active');
+Query OK, 0 rows affected (0.04 sec)
+

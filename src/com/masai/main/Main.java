@@ -14,7 +14,7 @@ public class Main {
 	static AdminDao admindao = new AdminDaoImpl();
 	static String option = "";
 	
-	static void optionsForUser(Scanner sc) {
+	static void optionsForAll(Scanner sc) {
 		System.out.println("Please choose an option: \n1. LogIn as Consumer \n2. LogIn as Admin \n"+
 		                   "3. Want a new Connnection \n4. Exit");
 		option = sc.next();
@@ -25,6 +25,23 @@ public class Main {
 		                       "3. Want a new Connnection \n4. Exit");
 			option = sc.next();
 		}
+	}
+	
+	static String optionsForAdmin(Scanner sc) {
+		System.out.println("Please choose an option: \n1. Register a new Consumer \n2. View all Consumers \n"+
+		                   "3. View bill of a Consumer \n4. View all the bills \n"+
+						   "5. View all Paid and Pending bills \n6. Delete a Consumer \n7. Logout");
+		String opt = sc.next();
+		
+		while(!opt.equals("1") && !opt.equals("2") && !opt.equals("3") && !opt.equals("4") &&
+			  !opt.equals("5") && !opt.equals("6") && !opt.equals("7") ) {
+			System.out.println("\nPlease choose a valid option");	
+			System.out.println("Please choose an option: \n1. Register a new Consumer \n2. View all Consumers \n"+
+	                   "3. View bill of a Consumer \n4. View all the bills \n"+
+					   "5. View all Paid and Pending bills \n6. Delete a Consumer \n7. Logout");
+			opt = sc.next();
+		}
+		return opt;
 	}
 	
 	static String tryAgain(Scanner sc) {
@@ -51,7 +68,7 @@ public class Main {
 		System.out.println("     WEL-COME TO RAJASTHAN\nELECTRICITY-BILL-PAYMENT SYSTEM");
 		System.out.println();
 		
-		optionsForUser(sc);	
+		optionsForAll(sc);	
 		
 		boolean execution = true;
 		
@@ -68,7 +85,7 @@ public class Main {
 					}
 					else if(opt.equals("2")) {
 						res = true;
-						optionsForUser(sc);
+						optionsForAll(sc);
 					}
 					else res = userdao.userLogin(sc);
 				}				
@@ -77,9 +94,21 @@ public class Main {
 				
 			case "2" : 
 				boolean res2 = admindao.adminLogin(sc);
-				
+				while(!res2) {
+					String opt = tryAgain(sc);
+					if(opt.equals("3")) {
+						execution = false;
+						res2 = true;
+						exitMethod();						
+					}
+					else if(opt.equals("2")) {
+						res2 = true;
+						optionsForAll(sc);
+					}
+					else res2 = admindao.adminLogin(sc);
+				}
+				optionsForAdmin(sc);
 				execution = false;
-				
 				break;
 				
 				

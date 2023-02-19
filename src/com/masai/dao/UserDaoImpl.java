@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao{
 		String pass = sc.next();		
 		
 		try (Connection conn = DBUtil.getAConnection()) {
-			PreparedStatement ps = conn.prepareStatement("SELECT * from admin where username=? AND password=?");
+			PreparedStatement ps = conn.prepareStatement("SELECT * from consumers where username=? AND password=?");
 			ps.setString(1, user);
 			ps.setString(2, pass);
 			

@@ -5,5 +5,7 @@ import java.util.Scanner;
 public interface AdminDao {
 	
 	boolean adminLogin(Scanner sc);
+	
+	boolean registerANewCustomer(Scanner sc);
 
 }
