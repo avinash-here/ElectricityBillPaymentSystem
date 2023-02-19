@@ -4,3 +4,9 @@ Query OK, 1 row affected (0.02 sec)
 mysql> use electricityBillPaymentSystem;
 Database changed
 
+create table admin (username varchar(20) primary key, name varchar(24) not null, password varchar(20) not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into admin values ('admin', 'Avinash', 'admin');
+Query OK, 1 row affected (0.01 sec)
+
