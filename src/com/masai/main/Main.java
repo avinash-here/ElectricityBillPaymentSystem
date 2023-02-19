@@ -1,12 +1,15 @@
 package com.masai.main;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.Scanner;
 
 import com.masai.dao.AdminDao;
 import com.masai.dao.AdminDaoImpl;
 import com.masai.dao.UserDao;
 import com.masai.dao.UserDaoImpl;
+import com.masai.exceptions.ConsumerException;
+import com.masai.models.Consumer;
 import com.masai.utility.DBUtil;
 
 public class Main {
@@ -107,7 +110,35 @@ public class Main {
 					}
 					else res2 = admindao.adminLogin(sc);
 				}
-				optionsForAdmin(sc);
+				String opt = optionsForAdmin(sc);
+				if(opt.equals("1")) {
+					admindao.registerANewCustomer(sc);
+				}
+				else if(opt.equals("2")) {
+					try {
+						List<Consumer> list = admindao.viewAllConsumers();
+						System.out.println(" -> All Consumer Details: ");
+						for(Consumer c : list) System.out.println(c);
+						
+					} catch (ConsumerException e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				else if(opt.equals("6")) {
+					
+					System.out.println("Enter username of the consumer you want to delete");
+					String user = sc.next();
+					try {
+						admindao.deleteConsumer(user);
+					} catch (ConsumerException e) {
+						System.out.println(e.getMessage());
+					}
+					
+				}
+				else if(opt.equals("7")) {
+					execution = false;			
+					exitMethod();						
+				}
 				execution = false;
 				break;
 				
