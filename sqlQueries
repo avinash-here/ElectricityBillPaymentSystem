@@ -1,3 +1,6 @@
 mysql> create database electricityBillPaymentSystem;
 Query OK, 1 row affected (0.02 sec)
 
+mysql> use electricityBillPaymentSystem;
+Database changed
+
